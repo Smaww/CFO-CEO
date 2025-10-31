@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تقرير أحمد سامي اليومي</title>
+  
+  <!-- خط كايرو -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Cairo", sans-serif;
+      background: #f3f5f7;
+      margin: 0;
+      padding: 30px;
+      color: #222;
+      text-align: right;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      padding: 24px 28px;
+      max-width: 850px;
+      margin: auto;
+      transition: 0.3s;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #111;
+      font-weight: 700;
+      font-size: 22px;
+    }
+
+    small {
+      color: #777;
+      font-size: 14px;
+    }
+
+    fieldset {
+      border: 1px solid #e2e2e2;
+      padding: 14px;
+      margin: 18px 0;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    legend {
+      padding: 0 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 6px;
+      font-family: "Cairo", sans-serif;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .confirm-box {
+      margin: 14px 0;
+      background: #f8f9fa;
+      padding: 10px 12px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: "Cairo", sans-serif;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .btn-print {
+      background: #28a745;
+    }
+
+    .btn-print:hover {
+      background: #1e7e34;
+    }
+
+    .save-message {
+      text-align: center;
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 15px;
+      display: none;
+    }
+
+    /* تحسين للطباعة */
+    @media print {
+      body {
+        background: #fff;
+      }
+      .btns, .save-message {
+        display: none !important;
+      }
+      section {
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<section>
+  <h3>🧾 قائمة مهام أحمد سامي — التقرير اليومي</h3>
+  <small>أشر فقط على البنود التي أنجزتها بنفسك اليوم.</small>
+
+  <!-- تاريخ التقرير -->
+  <div style="margin:16px 0">
+    <label for="reportDate">📅 تاريخ التقرير</label>
+    <input id="reportDate" name="report_date" type="date" />
+  </div>
+
+  <!-- التقارير والمراجعة اليومية -->
+  <fieldset>
+    <legend>التقارير والمراجعة اليومية</legend>
+    <label><input type="checkbox" value="bank_statements_reviewed"> راجعت كشوفات البنوك (العربي/الأهلي/الإنماء)</label>
+    <label><input type="checkbox" value="zoho_reconciled"> تمت مطابقة الأرصدة البنكية داخل Zoho</label>
+    <label><input type="checkbox" value="movements_checked"> راجعت الحركات اليومية (التحويلات + الإيداعات)</label>
+    <label><input type="checkbox" value="vendor_invoices_recorded"> تأكدت من تسجيل فواتير الموردين الجديدة</label>
+    <label><input type="checkbox" value="sales_invoices_linked"> تأكدت من ربط فواتير المبيعات بالموردين/الأرصدة</label>
+    <label><input type="checkbox" value="pending_payments_followed"> تابعت عمليات الدفع المعلقة أو المؤجلة</label>
+    <label><input type="checkbox" value="expenses_classified"> تأكدت من صحة تصنيف المصروفات اليومية</label>
+  </fieldset>
+
+  <!-- التحليل المالي -->
+  <fieldset>
+    <legend>التحليل المالي</legend>
+    <label><input type="checkbox" value="cash_flow_summary"> أعددت ملخص المقبوضات والمدفوعات اليومية</label>
+    <label><input type="checkbox" value="vendors_balance_tracked"> تابعت الرصيد الإجمالي للموردين</label>
+    <label><input type="checkbox" value="revenue_vs_target"> قارنت الإيرادات اليومية بالمستهدف الشهري</label>
+    <label><input type="checkbox" value="daily_growth_rate"> راقبت نسبة النمو اليومي في المبيعات</label>
+  </fieldset>
+
+  <!-- الإشراف والمتابعة -->
+  <fieldset>
+    <legend>الإشراف والمتابعة</legend>
+    <label><input type="checkbox" value="freelancer_reviewed"> راجعت عمل الفريلانسر وتأكدت من دقة الإدخالات</label>
+    <label><input type="checkbox" value="accounting_corrections"> صححت أو عدّلت بيانات محاسبية خاطئة</label>
+    <label><input type="checkbox" value="intercompany_followup"> تابعت العمليات المالية بين الفروع (سماو/أوشن)</label>
+    <label><input type="checkbox" value="bank_communications"> تواصلت مع البنوك بشأن عمليات أو استفسارات</label>
+  </fieldset>
+
+  <!-- التقارير الإدارية -->
+  <fieldset>
+    <legend>التقارير الإدارية</legend>
+    <label><input type="checkbox" value="slack_report_sent"> أرسلت التقرير اليومي في قناة Slack #CFO_CEO</label>
+    <label><input type="checkbox" value="tomorrow_plan_written"> كتبت خطة عمل الغد</label>
+    <label><input type="checkbox" value="improvement_notes_added"> أضفت ملاحظات للتحسين أو تنبيهات مالية</label>
+  </fieldset>
+
+  <!-- الأعمال المنفذة -->
+  <div style="margin:16px 0">
+    <label for="doneByAhmad"> أعمال قمت بها شخصيًا اليوم:</label>
+    <textarea id="doneByAhmad" placeholder="اكتب بإيجاز: راجعت كشف بنك العربي، طابقت الرصيد في Zoho، تابعت فواتير Party Star..."></textarea>
+  </div>
+
+  <!-- تأكيد -->
+  <div class="confirm-box">
+    <label>
+      <input id="confirmByAhmad" type="checkbox" required>
+       أؤكد أن البنود المؤشرة أعلاه تمت مراجعتي/تنفيذي لها شخصيًا اليوم.
+    </label>
+  </div>
+
+  <!-- الأزرار -->
+  <div class="btns">
+    <!-- <button id="saveReport">💾 حفظ البيانات</button> -->
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
+  </div>
+
+  <div class="save-message" id="saveMessage">تم حفظ التقرير بنجاح ✅</div>
+</section>
+
+<script>
+  // تعبئة التاريخ التلقائي
+  (function () {
+    const d = document.getElementById('reportDate');
+    if (d && !d.value) {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      d.value = `${yyyy}-${mm}-${dd}`;
+    }
+  })();
+
+  // الحفظ المحلي
+  const allInputs = document.querySelectorAll('input, textarea');
+  const saveBtn = document.getElementById('saveReport');
+  const saveMsg = document.getElementById('saveMessage');
+
+  // تحميل البيانات المحفوظة
+  window.addEventListener('load', () => {
+    allInputs.forEach(el => {
+      if (el.type === 'checkbox') {
+        el.checked = localStorage.getItem(el.value) === 'true';
+      } else {
+        const saved = localStorage.getItem(el.id);
+        if (saved) el.value = saved;
+      }
+    });
+  });
+
+  // عند الحفظ
+  saveBtn.addEventListener('click', () => {
+    allInputs.forEach(el => {
+      if (el.type === 'checkbox') {
+        localStorage.setItem(el.value, el.checked);
+      } else {
+        localStorage.setItem(el.id, el.value);
+      }
+    });
+
+    saveMsg.style.display = 'block';
+    setTimeout(() => saveMsg.style.display = 'none', 2000);
+  });
+</script>
+
+</body>
+</html>
