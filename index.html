@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تقرير أحمد سامي اليومي</title>
-  
+
   <!-- خط كايرو -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -56,13 +56,12 @@
 
     label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       cursor: pointer;
       font-size: 15px;
     }
 
-    input[type="date"],
-    textarea {
+    textarea, input[type="date"] {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -70,11 +69,18 @@
       margin-top: 6px;
       font-family: "Cairo", sans-serif;
       font-size: 15px;
+      display: none;
+      transition: 0.3s;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
+    textarea.visible {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .confirm-box {
@@ -125,20 +131,11 @@
       display: none;
     }
 
-    /* تحسين للطباعة */
     @media print {
-      body {
-        background: #fff;
-      }
-      .btns, .save-message {
-        display: none !important;
-      }
-      section {
-        box-shadow: none;
-        border: none;
-        margin: 0;
-        padding: 0;
-      }
+      body { background: #fff; }
+      .btns, .save-message { display: none !important; }
+      section { box-shadow: none; border: none; margin: 0; padding: 0; }
+      textarea { display: block !important; }
     }
   </style>
 </head>
@@ -149,7 +146,6 @@
   <h3>🧾 قائمة مهام أحمد سامي — التقرير اليومي</h3>
   <small>أشر فقط على البنود التي أنجزتها بنفسك اليوم.</small>
 
-  <!-- تاريخ التقرير -->
   <div style="margin:16px 0">
     <label for="reportDate">📅 تاريخ التقرير</label>
     <input id="reportDate" name="report_date" type="date" />
@@ -158,58 +154,82 @@
   <!-- التقارير والمراجعة اليومية -->
   <fieldset>
     <legend>التقارير والمراجعة اليومية</legend>
-    <label><input type="checkbox" value="bank_statements_reviewed"> راجعت كشوفات البنوك (العربي/الأهلي/الإنماء)</label>
-    <label><input type="checkbox" value="zoho_reconciled"> تمت مطابقة الأرصدة البنكية داخل Zoho</label>
+
+    <label><input type="checkbox" value="bank_review"> راجعت كشوفات البنوك</label>
+    <textarea placeholder="اذكر البنوك التي تمت مراجعتها أو ملاحظاتك"></textarea>
+
+    <label><input type="checkbox" value="zoho_reconciled"> تمت مطابقة الأرصدة داخل Zoho</label>
+    <textarea placeholder="أضف تفاصيل المطابقة إن وجدت"></textarea>
+
     <label><input type="checkbox" value="movements_checked"> راجعت الحركات اليومية (التحويلات + الإيداعات)</label>
+    <textarea placeholder="اذكر الحركات أو الملاحظات الهامة"></textarea>
+
     <label><input type="checkbox" value="vendor_invoices_recorded"> تأكدت من تسجيل فواتير الموردين الجديدة</label>
+    <textarea placeholder="أسماء الموردين أو عدد الفواتير"></textarea>
+
     <label><input type="checkbox" value="sales_invoices_linked"> تأكدت من ربط فواتير المبيعات بالموردين/الأرصدة</label>
+    <textarea placeholder="تفاصيل الربط أو الاستثناءات"></textarea>
+
     <label><input type="checkbox" value="pending_payments_followed"> تابعت عمليات الدفع المعلقة أو المؤجلة</label>
-    <label><input type="checkbox" value="expenses_classified"> تأكدت من صحة تصنيف المصروفات اليومية</label>
+    <textarea placeholder="اذكر العمليات المعلقة أو البنوك المعنية"></textarea>
+
+    <label><input type="checkbox" value="expenses_classified"> تأكدت من تصنيف المصروفات اليومية</label>
+    <textarea placeholder="اذكر أي ملاحظات تخص التصنيف"></textarea>
   </fieldset>
 
   <!-- التحليل المالي -->
   <fieldset>
     <legend>التحليل المالي</legend>
+
     <label><input type="checkbox" value="cash_flow_summary"> أعددت ملخص المقبوضات والمدفوعات اليومية</label>
+    <textarea placeholder="ملخص التدفقات المالية"></textarea>
+
     <label><input type="checkbox" value="vendors_balance_tracked"> تابعت الرصيد الإجمالي للموردين</label>
-    <label><input type="checkbox" value="revenue_vs_target"> قارنت الإيرادات اليومية بالمستهدف الشهري</label>
+    <textarea placeholder="ملاحظات حول أرصدة الموردين"></textarea>
+
+    <label><input type="checkbox" value="revenue_vs_target"> قارنت الإيرادات بالمستهدف الشهري</label>
+    <textarea placeholder="نسبة الإنجاز مقابل المستهدف"></textarea>
+
     <label><input type="checkbox" value="daily_growth_rate"> راقبت نسبة النمو اليومي في المبيعات</label>
+    <textarea placeholder="معدل النمو مقارنة بالأمس أو الأسبوع الماضي"></textarea>
   </fieldset>
 
   <!-- الإشراف والمتابعة -->
   <fieldset>
     <legend>الإشراف والمتابعة</legend>
+
     <label><input type="checkbox" value="freelancer_reviewed"> راجعت عمل الفريلانسر وتأكدت من دقة الإدخالات</label>
+    <textarea placeholder="أسماء الفريلانسر أو نوع المهام التي تمت مراجعتها"></textarea>
+
     <label><input type="checkbox" value="accounting_corrections"> صححت أو عدّلت بيانات محاسبية خاطئة</label>
+    <textarea placeholder="اذكر نوع الأخطاء التي تم تصحيحها"></textarea>
+
     <label><input type="checkbox" value="intercompany_followup"> تابعت العمليات المالية بين الفروع (سماو/أوشن)</label>
+    <textarea placeholder="تفاصيل العمليات أو الملاحظات"></textarea>
+
     <label><input type="checkbox" value="bank_communications"> تواصلت مع البنوك بشأن عمليات أو استفسارات</label>
+    <textarea placeholder="اذكر البنك وسبب التواصل"></textarea>
   </fieldset>
 
   <!-- التقارير الإدارية -->
   <fieldset>
     <legend>التقارير الإدارية</legend>
+
     <label><input type="checkbox" value="slack_report_sent"> أرسلت التقرير اليومي في قناة Slack #CFO_CEO</label>
-    <label><input type="checkbox" value="tomorrow_plan_written"> كتبت خطة عمل الغد</label>
+    <textarea placeholder="وقت الإرسال أو ملاحظات إضافية"></textarea>
+
     <label><input type="checkbox" value="improvement_notes_added"> أضفت ملاحظات للتحسين أو تنبيهات مالية</label>
+    <textarea placeholder="أكتب أهم الملاحظات أو التنبيهات"></textarea>
+
+    <label><input type="checkbox" value="tomorrow_plan_written"> خطة عمل الغد</label>
+    <textarea placeholder="اكتب خطة عمل الغد بالتفصيل"></textarea>
   </fieldset>
 
-  <!-- الأعمال المنفذة -->
-  <div style="margin:16px 0">
-    <label for="doneByAhmad"> أعمال قمت بها شخصيًا اليوم:</label>
-    <textarea id="doneByAhmad" placeholder="اكتب بإيجاز: راجعت كشف بنك العربي، طابقت الرصيد في Zoho، تابعت فواتير Party Star..."></textarea>
-  </div>
-
-  <!-- تأكيد -->
   <div class="confirm-box">
-    <label>
-      <input id="confirmByAhmad" type="checkbox" required>
-       أؤكد أن البنود المؤشرة أعلاه تمت مراجعتي/تنفيذي لها شخصيًا اليوم.
-    </label>
+    <label><input id="confirmByAhmad" type="checkbox"> أؤكد أن البنود المؤشرة أعلاه تمت مراجعتي وتنفيذي لها اليوم.</label>
   </div>
 
-  <!-- الأزرار -->
   <div class="btns">
-    <!-- <button id="saveReport">💾 حفظ البيانات</button> -->
     <button class="btn-print" onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
   </div>
 
@@ -217,10 +237,10 @@
 </section>
 
 <script>
-  // تعبئة التاريخ التلقائي
-  (function () {
+  // تعبئة التاريخ تلقائيًا
+  (function() {
     const d = document.getElementById('reportDate');
-    if (d && !d.value) {
+    if (!d.value) {
       const today = new Date();
       const yyyy = today.getFullYear();
       const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -229,35 +249,14 @@
     }
   })();
 
-  // الحفظ المحلي
-  const allInputs = document.querySelectorAll('input, textarea');
-  const saveBtn = document.getElementById('saveReport');
-  const saveMsg = document.getElementById('saveMessage');
-
-  // تحميل البيانات المحفوظة
-  window.addEventListener('load', () => {
-    allInputs.forEach(el => {
-      if (el.type === 'checkbox') {
-        el.checked = localStorage.getItem(el.value) === 'true';
-      } else {
-        const saved = localStorage.getItem(el.id);
-        if (saved) el.value = saved;
+  // عند الضغط على checkbox يظهر أو يخفي المربع النصي تحته
+  document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener('change', () => {
+      const next = chk.parentElement.nextElementSibling;
+      if (next && next.tagName === 'TEXTAREA') {
+        next.classList.toggle('visible', chk.checked);
       }
     });
-  });
-
-  // عند الحفظ
-  saveBtn.addEventListener('click', () => {
-    allInputs.forEach(el => {
-      if (el.type === 'checkbox') {
-        localStorage.setItem(el.value, el.checked);
-      } else {
-        localStorage.setItem(el.id, el.value);
-      }
-    });
-
-    saveMsg.style.display = 'block';
-    setTimeout(() => saveMsg.style.display = 'none', 2000);
   });
 </script>
 
