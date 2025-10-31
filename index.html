@@ -1,203 +1,317 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تقرير أحمد سامي اليومي</title>
-
-  <!-- خط Cairo -->
+  
+  <!-- خط كايرو -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#f3f5f7;
-      --card:#fff;
-      --accent:#007bff;
-      --success:#28a745;
-      --muted:#777;
-      --radius:12px;
-    }
-    body{
-      font-family:"Cairo",sans-serif;
-      background:var(--bg);
-      margin:0;
-      padding:28px;
-      color:#222;
-      -webkit-font-smoothing:antialiased;
+    body {
+      font-family: "Cairo", sans-serif;
+      background: #f3f5f7;
+      margin: 0;
+      padding: 30px;
+      color: #222;
+      text-align: right;
     }
 
-    .container{
-      max-width:980px;
-      margin:0 auto;
+    /* 🌟 استايل الجدول داخل الصفحة */
+.metrics {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 15px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.metrics th {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.metrics td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+  background: #fafafa;
+  transition: background 0.2s;
+}
+
+.metrics tr:hover td {
+  background: #f0f7ff;
+}
+
+.metric-label {
+  font-weight: 600;
+  color: #222;
+  background: #f8f9fa;
+}
+
+.table-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Cairo", sans-serif;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.table-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0,123,255,0.4);
+  outline: none;
+  background: #fff;
+}
+
+.metrics tr:last-child td {
+  border-bottom: none;
+}
+
+    section {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      padding: 24px 28px;
+      max-width: 950px;
+      margin: auto;
+      transition: 0.3s;
     }
 
-    section.card{
-      background:var(--card);
-      border-radius:16px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.07);
-      padding:26px;
+    h3 {
+      margin-top: 0;
+      color: #111;
+      font-weight: 700;
+      font-size: 22px;
     }
 
-    h3{ margin:0 0 6px; font-size:22px; font-weight:700; color:#111; }
-    small{ color:var(--muted); display:block; margin-bottom:12px; }
-
-    .row { margin:14px 0; }
-    label.inline{ display:block; cursor:pointer; font-size:15px; margin-bottom:8px; }
-    input[type="date"]{
-      width:220px; padding:8px 10px; border-radius:8px; border:1px solid #d6d6d6;
-      font-family:"Cairo",sans-serif;
+    small {
+      color: #777;
+      font-size: 14px;
     }
 
-    fieldset{
-      border:1px solid #e6e6e6; padding:14px; border-radius:10px; background:#fafafa; margin-top:16px;
-    }
-    legend{ font-weight:600; padding:0 8px; color:#333; }
-
-    label.inline > input[type="checkbox"]{ margin-left:8px; accent-color:var(--accent); }
-
-    textarea.sub-input, input.table-input {
-      display:none; /* shown when checkbox checked */
-      width:100%; box-sizing:border-box;
-      padding:8px 10px; border-radius:8px; border:1px solid #ddd;
-      margin:8px 0 10px;
-      font-family:"Cairo",sans-serif;
-      font-size:14px;
+    fieldset {
+      border: 1px solid #e2e2e2;
+      padding: 14px;
+      margin: 18px 0;
+      border-radius: 10px;
+      background: #fafafa;
     }
 
-    textarea.sub-input.visible, input.table-input.visible { display:block; }
-
-    .confirm-box{
-      background:#f8f9fa; border:1px solid #eee; padding:12px; border-radius:10px; margin-top:14px; font-weight:600;
+    legend {
+      padding: 0 8px;
+      font-weight: 600;
+      color: #333;
     }
 
-    .actions{ margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    button{
-      cursor:pointer; border:none; padding:10px 18px; border-radius:10px; color:#fff; font-weight:600;
-      font-family:"Cairo",sans-serif;
-    }
-    .btn-save{ background:var(--accent); }
-    .btn-print{ background:var(--success); }
-
-    .save-notice{
-      text-align:center; margin-top:10px; color:var(--success); font-weight:700; opacity:0; transition:opacity .25s;
+    label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 15px;
     }
 
-    /* الجدول */
-    table.metrics{
-      width:100%; border-collapse:collapse; margin-top:8px;
-    }
-    table.metrics th, table.metrics td{ border:1px solid #e8e8e8; padding:8px 10px; text-align:right; vertical-align:top; }
-    table.metrics th{ background:#fafafa; font-weight:700; }
-    .metric-label { white-space:nowrap; font-weight:600; }
-
-    /* طباعة */
-    @media print{
-      body{ background:#fff; }
-      .actions, .save-notice { display:none !important; }
-      .card{ box-shadow:none; border:0; margin:0; padding: 0 0 20px 0; }
-      /* force inputs & textareas to show */
-      input[type="text"], input[type="date"], textarea { border: none; background: transparent; display:block !important; }
-      .btn-print, .btn-save { display:none; }
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 6px;
+      font-family: "Cairo", sans-serif;
+      font-size: 15px;
     }
 
-    @media (max-width:600px){
-      input[type="date"]{ width:100%; }
-      .actions{ flex-direction:column; }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
     }
 
+    .notes-box {
+      display: none;
+      margin-top: 10px;
+      background: #fefefe;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .confirm-box {
+      margin: 14px 0;
+      background: #f8f9fa;
+      padding: 10px 12px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: "Cairo", sans-serif;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .btn-print {
+      background: #28a745;
+    }
+
+    .btn-print:hover {
+      background: #1e7e34;
+    }
+
+    .save-message {
+      text-align: center;
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 15px;
+      display: none;
+    }
+
+    /* جدول التحليل */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    td {
+      padding: 8px 10px;
+    }
+
+    /* تحسين للطباعة */
+    @media print {
+      body {
+        background: #fff;
+      }
+      .btns, .save-message {
+        display: none !important;
+      }
+      section {
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <section class="card" id="reportCard">
-      <h3>🧾 قائمة مهام أحمد سامي — المدير المالي — التقرير اليومي</h3>
-      <small>أشر فقط على البنود التي أنجزتها بنفسك اليوم. بعد التعليم يظهر مربع للنص أسفل كل بند لتكتب التفاصيل.</small>
 
-      <div class="row">
-        <label for="reportDate" style="display:block; margin-bottom:6px;">📅 تاريخ التقرير</label>
-        <input id="reportDate" name="report_date" type="date" />
-      </div>
+<section>
+  <h3>🧾 قائمة مهام أحمد سامي — التقرير اليومي</h3>
+  <small>أشر فقط على البنود التي أنجزتها بنفسك اليوم.</small>
 
-      <!-- التقارير والمراجعة اليومية -->
-      <fieldset>
-        <legend>التقارير والمراجعة اليومية</legend>
+  <!-- تاريخ التقرير -->
+  <div style="margin:16px 0">
+    <label for="reportDate">📅 تاريخ التقرير</label>
+    <input id="reportDate" name="report_date" type="date" />
+  </div>
 
-        <label class="inline"><input type="checkbox" value="bank_review"> راجعت كشوفات البنوك</label>
-        <textarea class="sub-input" id="bank_review_txt" placeholder="اذكر البنوك/أو ملاحظات المراجعة"></textarea>
+  <!-- جدول التحليل المالي -->
+  <!-- <table>
+    <tr><th>المؤشر</th><th>القيمة</th><th>الملاحظات</th></tr>
+    <tr><td>💵 إجمالي المقبوضات اليوم</td><td></td><td>مثال: ‎45,200 ريال</td></tr>
+    <tr><td>🧾 عدد فواتير الموردين المسجلة</td><td></td><td>مثال: ‎18 فاتورة</td></tr>
+    <tr><td>🏦 عدد كشوف البنوك التي تمت مراجعتها</td><td></td><td>مثال: 3 بنوك</td></tr>
+    <tr><td>📊 نسبة التطابق بين Zoho والبنوك (%)</td><td></td><td>مثال: ‎98.7%</td></tr>
+    <tr><td>⏱ سرعة إقفال العمليات اليومية (ساعات)</td><td></td><td>مثال: ‎2.3 ساعة</td></tr>
+    <tr><td>📈 نسبة النمو اليومي في الإيرادات (%)</td><td></td><td>مثال: ‎+2.1%</td></tr>
+    <tr><td>📅 عدد الفواتير المعلقة أو المؤجلة</td><td></td><td>مثال: ‎2 فواتير</td></tr>
+    <tr><td>🧮 عدد الأخطاء المحاسبية المصححة اليوم</td><td></td><td>مثال: ‎0 – لا يوجد</td></tr>
+  </table> -->
 
-        <label class="inline"><input type="checkbox" value="zoho_reconciled"> تمت مطابقة الأرصدة داخل Zoho</label>
-        <textarea class="sub-input" id="zoho_reconciled_txt" placeholder="تفاصيل المطابقة أو الفروقات"></textarea>
+  <!-- التقارير والمراجعة اليومية -->
+  <fieldset>
+    <legend>التقارير والمراجعة اليومية</legend>
+    <label><input type="checkbox"> راجعت كشوفات البنوك</label>
+    <label><input type="checkbox"> تمت مطابقة الأرصدة البنكية داخل Zoho</label>
+    <label><input type="checkbox"> راجعت الحركات اليومية</label>
 
-        <label class="inline"><input type="checkbox" value="movements_checked"> راجعت الحركات اليومية (التحويلات + الإيداعات)</label>
-        <textarea class="sub-input" id="movements_checked_txt" placeholder="اذكر الحركات أو ملاحظات هامة"></textarea>
+    <label style="margin-top:12px;"><input type="checkbox" class="toggle-notes"> إضافة ملاحظات عامة لهذا القسم</label>
+    <div class="notes-box"><textarea placeholder="أدخل ملاحظات هذا القسم..."></textarea></div>
+  </fieldset>
 
-        <label class="inline"><input type="checkbox" value="vendor_invoices_recorded"> تأكدت من تسجيل فواتير الموردين الجديدة</label>
-        <textarea class="sub-input" id="vendor_invoices_recorded_txt" placeholder="أسماء الموردين أو عدد الفواتير"></textarea>
+  <!-- التحليل المالي -->
+  <fieldset>
+    <legend>التحليل المالي</legend>
+    <label><input type="checkbox"> أعددت ملخص المقبوضات والمدفوعات اليومية</label>
+    <label><input type="checkbox"> تابعت الرصيد الإجمالي للموردين</label>
+    <label><input type="checkbox"> قارنت الإيرادات اليومية بالمستهدف الشهري</label>
 
-        <label class="inline"><input type="checkbox" value="sales_invoices_linked"> تأكدت من ربط فواتير المبيعات بالموردين/الأرصدة</label>
-        <textarea class="sub-input" id="sales_invoices_linked_txt" placeholder="تفاصيل الربط أو استثناءات"></textarea>
+    <label style="margin-top:12px;"><input type="checkbox" class="toggle-notes"> إضافة ملاحظات عامة لهذا القسم</label>
+    <div class="notes-box"><textarea placeholder="أدخل ملاحظات هذا القسم..."></textarea></div>
+  </fieldset>
 
-        <label class="inline"><input type="checkbox" value="pending_payments_followed"> تابعت عمليات الدفع المعلقة أو المؤجلة</label>
-        <textarea class="sub-input" id="pending_payments_followed_txt" placeholder="اذكر العمليات المعلقة أو البنوك المعنية"></textarea>
+  <!-- الإشراف والمتابعة -->
+  <fieldset>
+    <legend>الإشراف والمتابعة</legend>
+    <label><input type="checkbox"> راجعت عمل الفريلانسر</label>
+    <label><input type="checkbox"> صححت بيانات محاسبية خاطئة</label>
 
-        <label class="inline"><input type="checkbox" value="expenses_classified"> تأكدت من تصنيف المصروفات اليومية</label>
-        <textarea class="sub-input" id="expenses_classified_txt" placeholder="ملاحظات حول تصنيف المصروفات"></textarea>
-      </fieldset>
+    <label style="margin-top:12px;"><input type="checkbox" class="toggle-notes"> إضافة ملاحظات عامة لهذا القسم</label>
+    <div class="notes-box"><textarea placeholder="أدخل ملاحظات هذا القسم..."></textarea></div>
+  </fieldset>
 
-      <!-- التحليل المالي -->
-      <fieldset>
-        <legend>التحليل المالي</legend>
-        <label class="inline"><input type="checkbox" value="cash_flow_summary"> أعددت ملخص المقبوضات والمدفوعات اليومية</label>
-        <textarea class="sub-input" id="cash_flow_summary_txt" placeholder="ملخص المقبوضات/المدفوعات"></textarea>
+  <!-- التقارير الإدارية -->
+  <fieldset>
+    <legend>التقارير الإدارية</legend>
+    <label><input type="checkbox"> أرسلت التقرير اليومي في قناة Slack</label>
 
-        <label class="inline"><input type="checkbox" value="vendors_balance_tracked"> تابعت الرصيد الإجمالي للموردين</label>
-        <textarea class="sub-input" id="vendors_balance_tracked_txt" placeholder="ملاحظات حول أرصدة الموردين"></textarea>
+    <label style="margin-top:12px;"><input type="checkbox" class="toggle-notes"> إضافة ملاحظات عامة لهذا القسم</label>
+    <div class="notes-box"><textarea placeholder="أدخل ملاحظات هذا القسم..."></textarea></div>
+  </fieldset>
 
-        <label class="inline"><input type="checkbox" value="revenue_vs_target"> قارنت الإيرادات بالمستهدف الشهري</label>
-        <textarea class="sub-input" id="revenue_vs_target_txt" placeholder="نسبة الإنجاز مقابل المستهدف"></textarea>
+  <!-- خطة عمل الغد -->
+  <fieldset>
+    <legend>خطة عمل الغد</legend>
+    <label><input type="checkbox" id="toggleTomorrowPlan"> أريد كتابة خطة عمل الغد</label>
+    <div class="notes-box" id="tomorrowPlanBox"><textarea placeholder="اكتب خطة عمل الغد بالتفصيل..."></textarea></div>
+  </fieldset>
+ <fieldset>
 
-        <label class="inline"><input type="checkbox" value="daily_growth_rate"> راقبت نسبة النمو اليومي في المبيعات</label>
-        <textarea class="sub-input" id="daily_growth_rate_txt" placeholder="معدل النمو مقارنة بيوم/أسبوع سابق"></textarea>
-      </fieldset>
-
-      <!-- الإشراف والمتابعة -->
-      <fieldset>
-        <legend>الإشراف والمتابعة</legend>
-        <label class="inline"><input type="checkbox" value="freelancer_reviewed"> راجعت عمل الفريلانسر وتأكدت من دقة الإدخالات</label>
-        <textarea class="sub-input" id="freelancer_reviewed_txt" placeholder="تفاصيل المراجعة"></textarea>
-
-        <label class="inline"><input type="checkbox" value="accounting_corrections"> صححت أو عدّلت بيانات محاسبية خاطئة</label>
-        <textarea class="sub-input" id="accounting_corrections_txt" placeholder="اذكر نوع الأخطاء التي تم تصحيحها"></textarea>
-
-        <label class="inline"><input type="checkbox" value="intercompany_followup"> تابعت العمليات المالية بين الفروع</label>
-        <textarea class="sub-input" id="intercompany_followup_txt" placeholder="تفاصيل العمليات أو ملاحظات"></textarea>
-
-        <label class="inline"><input type="checkbox" value="bank_communications"> تواصلت مع البنوك بشأن عمليات أو استفسارات</label>
-        <textarea class="sub-input" id="bank_communications_txt" placeholder="اذكر البنك وسبب التواصل"></textarea>
-      </fieldset>
-
-      <!-- التقارير الإدارية + خطة الغد -->
-      <fieldset>
-        <legend>التقارير الإدارية</legend>
-        <label class="inline"><input type="checkbox" value="slack_report_sent"> أرسلت التقرير اليومي في قناة Slack #CFO_CEO</label>
-        <textarea class="sub-input" id="slack_report_sent_txt" placeholder="وقت الإرسال أو ملاحظات"></textarea>
-
-        <label class="inline"><input type="checkbox" value="improvement_notes_added"> أضفت ملاحظات للتحسين أو تنبيهات مالية</label>
-        <textarea class="sub-input" id="improvement_notes_added_txt" placeholder="أهم الملاحظات أو التنبيهات"></textarea>
-
-        <label class="inline"><input type="checkbox" value="tomorrow_plan_written" id="tomorrowPlanChk"> خطة عمل الغد</label>
-        <textarea class="sub-input" id="tomorrow_plan_txt" placeholder="اكتب خطة عمل الغد بالتفصيل"></textarea>
-      </fieldset>
-
-      <fieldset>
-        <legend>ماذا يوجد علي جدول الاعمال غداً ؟</legend>
-
-        <label class="inline"><input type="checkbox" value="tomorrow_plan_written" id="tomorrowPlanChk"> خطة عمل الغد</label>
-        <textarea class="sub-input" id="tomorrow_plan_txt" placeholder="اكتب خطة عمل الغد بالتفصيل"></textarea>
-      </fieldset>
-
-      <!-- جدول المقاييس المطلوب -->
-      <fieldset>
         <legend>مؤشرات سريعة (مقاييس اليوم)</legend>
 
         <table class="metrics" aria-label="مقاييس اليوم">
@@ -259,180 +373,39 @@
           </tbody>
         </table>
       </fieldset>
-
-      <div class="confirm-box">
-        <label><input id="confirmByAhmad" type="checkbox"> أؤكد أن البنود المؤشرة أعلاه تمت مراجعتي/تنفيذي لها شخصيًا اليوم.</label>
-      </div>
-
-      <div class="actions">
-        <button class="btn-save" id="manualSaveBtn">💾 حفظ محلي</button>
-        <button class="btn-print" id="printBtn">🖨️ طباعة / حفظ PDF</button>
-      </div>
-
-      <div class="save-notice" id="saveNotice">تم الحفظ محلياً ✅</div>
-
-    </section>
+  <!-- تأكيد -->
+  <div class="confirm-box">
+    <label><input type="checkbox"> أؤكد أن البنود المؤشرة تمت مراجعتي شخصيًا اليوم.</label>
   </div>
 
-  <script>
-    // مفاتيح الحفظ - تساعد على تنظيم التخزين
-    const STORAGE_PREFIX = 'daily_report_';
+  <!-- الأزرار -->
+  <div class="btns">
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
+  </div>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const dateEl = document.getElementById('reportDate');
+</section>
 
-      // تعبئة التاريخ تلقائياً إذا لم يكن محفوظاً
-      const savedDate = localStorage.getItem(STORAGE_PREFIX + 'reportDate');
-      if (dateEl) {
-        if (savedDate) {
-          dateEl.value = savedDate;
-        } else if (!dateEl.value) {
-          const today = new Date();
-          dateEl.value = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-        }
-        dateEl.addEventListener('change', saveState);
-      }
+<script>
+  // تعبئة التاريخ التلقائي
+  const dateInput = document.getElementById('reportDate');
+  const today = new Date();
+  dateInput.value = today.toISOString().split('T')[0];
 
-      // ربط كل checkbox لاظهار/اخفاء textarea الذي يليه
-      document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-        const label = chk.closest('label');
-        // textarea قد تكون بعد ال label مباشرة
-        const next = label ? label.nextElementSibling : null;
-
-        // استرجاع حالة الـ checkbox إن وُجدت
-        const keyChk = STORAGE_PREFIX + 'chk_' + (chk.value || chk.id || Math.random());
-        const storedChk = localStorage.getItem(keyChk);
-        if (storedChk !== null) {
-          chk.checked = storedChk === 'true';
-        }
-
-        // اظهار/اخفاء المربع النصي المرتبط (لو وجد)
-        if (next && (next.tagName === 'TEXTAREA' || next.classList.contains('sub-input'))) {
-          next.classList.toggle('visible', chk.checked);
-        }
-
-        // حدث تغير الـ checkbox
-        chk.addEventListener('change', () => {
-          if (next && (next.tagName === 'TEXTAREA' || next.classList.contains('sub-input'))) {
-            next.classList.toggle('visible', chk.checked);
-          }
-          // حفظ تلقائي
-          saveState();
-        });
-      });
-
-      // استرجاع كل النصوص والمدخلات (textarea, input[type=text]) من localStorage
-      document.querySelectorAll('textarea, input[type="text"], input[type="date"]').forEach(el => {
-        const id = el.id;
-        if (!id) return;
-        const stored = localStorage.getItem(STORAGE_PREFIX + id);
-        if (stored !== null) el.value = stored;
-
-        // عند الكتابة احفظ تلقائياً
-        el.addEventListener('input', debounce(saveState, 400));
-      });
-
-      // استرجاع حالة تأكيد المدير (checkbox)
-      const confirmChk = document.getElementById('confirmByAhmad');
-      if (confirmChk) {
-        const storedC = localStorage.getItem(STORAGE_PREFIX + 'confirmByAhmad');
-        if (storedC !== null) confirmChk.checked = storedC === 'true';
-        confirmChk.addEventListener('change', saveState);
-      }
-
-      // زر الحفظ اليدوي
-      const manualSaveBtn = document.getElementById('manualSaveBtn');
-      if (manualSaveBtn) manualSaveBtn.addEventListener('click', () => {
-        saveState();
-        showSavedNotice();
-      });
-
-      // زر الطباعة
-      const printBtn = document.getElementById('printBtn');
-      if (printBtn) printBtn.addEventListener('click', () => {
-        // تأكد من عرض كل الحقول المختفية قبل الطباعة
-        revealAllForPrint();
-        setTimeout(() => window.print(), 150);
-      });
-
-      // عند التحميل، اضبط ظهور مربعات النص بناء على القيم المخزنة
-      toggleAllSubInputsFromStorage();
-
-      // حفظ أولي (لا يضر)
-      // saveState(); // غير مطلوب فورياً
+  // إظهار مربعات الملاحظات عند تفعيل CheckBox
+  document.querySelectorAll('.toggle-notes').forEach(chk => {
+    chk.addEventListener('change', function() {
+      const box = this.closest('fieldset').querySelector('.notes-box');
+      box.style.display = this.checked ? 'block' : 'none';
     });
+  });
 
-    // حفظ الحالة بالكامل
-    function saveState(){
-      try {
-        // حفظ التاريخ
-        const dateEl = document.getElementById('reportDate');
-        if (dateEl) localStorage.setItem(STORAGE_PREFIX + 'reportDate', dateEl.value);
+  // خطة عمل الغد
+  const toggleTomorrow = document.getElementById('toggleTomorrowPlan');
+  const tomorrowBox = document.getElementById('tomorrowPlanBox');
+  toggleTomorrow.addEventListener('change', function() {
+    tomorrowBox.style.display = this.checked ? 'block' : 'none';
+  });
+</script>
 
-        // حفظ كل checkboxes
-        document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-          const keyChk = STORAGE_PREFIX + 'chk_' + (chk.value || chk.id || '');
-          localStorage.setItem(keyChk, chk.checked);
-        });
-
-        // حفظ النصوص (textarea & inputs)
-        document.querySelectorAll('textarea, input[type="text"], input[type="date"]').forEach(el => {
-          if (!el.id) return;
-          localStorage.setItem(STORAGE_PREFIX + el.id, el.value);
-        });
-
-        // تخزين حالة confirm
-        const confirmChk = document.getElementById('confirmByAhmad');
-        if (confirmChk) localStorage.setItem(STORAGE_PREFIX + 'confirmByAhmad', confirmChk.checked);
-
-        // اظهار رسالة حفظ قصيرة
-        showSavedNotice();
-      } catch (e) {
-        console.error('Save error', e);
-      }
-    }
-
-    // اظهار رسالة "تم الحفظ" قصيرة
-    function showSavedNotice(){
-      const n = document.getElementById('saveNotice');
-      if (!n) return;
-      n.style.opacity = '1';
-      clearTimeout(n._t);
-      n._t = setTimeout(()=> n.style.opacity = '0', 1400);
-    }
-
-    // تبديل مرئي لكل المربعات (استرجاع من التخزين)
-    function toggleAllSubInputsFromStorage(){
-      document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-        const label = chk.closest('label');
-        const next = label ? label.nextElementSibling : null;
-        const keyChk = STORAGE_PREFIX + 'chk_' + (chk.value || chk.id || '');
-        const storedChk = localStorage.getItem(keyChk);
-        if (storedChk !== null) {
-          chk.checked = storedChk === 'true';
-        }
-        if (next && (next.tagName === 'TEXTAREA' || next.classList.contains('sub-input'))) {
-          next.classList.toggle('visible', chk.checked);
-        }
-      });
-    }
-
-    // عرض كل الحقول قبل الطباعة (حتى لو مخفية)
-    function revealAllForPrint(){
-      // عرض جميع الـ textareas المؤقتة
-      document.querySelectorAll('textarea.sub-input').forEach(t => t.classList.add('visible'));
-      // عرض كل inputs في الجدول
-      document.querySelectorAll('input.table-input').forEach(i => i.classList.add('visible'));
-    }
-
-    // Debounce util
-    function debounce(fn, wait){
-      let t;
-      return function(...args){
-        clearTimeout(t);
-        t = setTimeout(()=> fn.apply(this, args), wait);
-      };
-    }
-  </script>
 </body>
 </html>
